@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -479,7 +480,10 @@ public class Crate extends AbstractFileData<CratesPlugin> {
         allRewards.forEach(reward -> {
             rewards.put(reward, reward.getWeight());
         });
-        return Rnd.getByWeight(rewards);
+
+        var random = ThreadLocalRandom.current();
+
+        return rewards.keySet().stream().toList().get(random.nextInt(0, rewards.size()));
     }
 
     public void addBlockPosition(@NotNull Location location) {

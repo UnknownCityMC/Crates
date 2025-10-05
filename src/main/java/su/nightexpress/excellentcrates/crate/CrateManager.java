@@ -2,6 +2,7 @@ package su.nightexpress.excellentcrates.crate;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -504,6 +505,7 @@ public class CrateManager extends AbstractManager<CratesPlugin> {
 
     public void giveReward(@NotNull Player player, @NotNull Reward reward) {
         reward.giveContent(player);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         Crate crate = reward.getCrate();
         GlobalCrateData globalData = this.plugin.getDataManager().getCrateDataOrCreate(crate);

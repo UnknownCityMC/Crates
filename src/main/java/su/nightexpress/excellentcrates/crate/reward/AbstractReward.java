@@ -166,11 +166,10 @@ public abstract class AbstractReward implements Reward {
 
     @Override
     public double getRollChance() {
-        double sum = this.crate.getRewards(this.rarity).stream().mapToDouble(Reward::getWeight).sum();
+        double sum = this.crate.getRewards(this.rarity).size();
         double rarityChance = this.rarity.getRollChance(this.crate);
-        double chance = (this.weight / sum) * (rarityChance / 100D);
 
-        return chance * 100D;
+        return rarityChance / sum;
     }
 
     @Override
